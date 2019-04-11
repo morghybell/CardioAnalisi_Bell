@@ -159,7 +159,7 @@ namespace DataCardio_Bell.Test
             Assert.AreEqual(FCR_Atteso, FCR_Calcolato);
         }
 
-        //testo i valori di frequenza cardiaca a riposo
+        //testo i valori delle calorie bruciate
         [DataRow("F", "75", "57", "30", "30", "58,6218929254302")]
         [DataRow("M", "70", "77", "30", "30", "74,8573135755259")]
         [DataRow("B", "70", "77", "30", "30", "Il genere da lei inserito non è valido")]
@@ -184,5 +184,27 @@ namespace DataCardio_Bell.Test
 
             Assert.AreEqual(CB_Atteso, CB_Calcolato);
         }
+
+        //testo i valori della spesa energetica
+        [DataRow("corsa", "10", "57", "513")]
+        [DataRow("camm", "10", "57", "285")]
+        [DataRow("camm", "10", "-5", "Il peso da lei inserito è negativo")]
+        [DataRow("camm", "-5", "57", "Lo spazio da lei inserito è negativo")]
+        [DataRow("saltello", "10", "57", "L'andamento da lei inserito non è valido")]
+        [DataRow("corsa", "j", "57", "Errore")]
+        [TestMethod]
+        public void SEnergetica(string Pa, string S, string P, string Atteso)
+        {
+            string Passo = Pa;
+            string Spazio = S;
+            string Peso = P;
+            string SE_Attesa = Atteso;
+
+            string SE_Calcolata = EquazioniLibrary_Bell.DataCardio.SEnergetica(Passo, Spazio, Peso);
+
+            Assert.AreEqual(SE_Attesa, SE_Calcolata);
+        }
+
+        
     }
 }

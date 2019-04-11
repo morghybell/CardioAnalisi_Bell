@@ -217,6 +217,57 @@ namespace EquazioniLibrary_Bell
 
             return risp;
         }
-        
+
+        //calcolo le spesa energetica
+        public static string SEnergetica(string Passo, string Spazio, string Peso)
+        {
+            string risp = "";
+
+            try
+            {
+                double S = Convert.ToDouble(Spazio);
+                double P = Convert.ToDouble(Peso);
+
+                if (P < 0 || S < 0)
+                {
+                    if (S < 0)
+                    {
+                        risp = "Lo spazio da lei inserito è negativo";
+                    }
+
+                    if (P < 0)
+                    {
+                        risp = "Il peso da lei inserito è negativo";
+                    }
+                }
+                else
+                {
+                    double SEnergetica = 0;
+
+                    if (Passo == "corsa")
+                    {
+                        SEnergetica = 0.9 * S * P;
+
+                        risp = Convert.ToString(SEnergetica);
+                    }
+                    else if (Passo == "camm")
+                    {
+                        SEnergetica = 0.5 * S * P;
+
+                        risp = Convert.ToString(SEnergetica);
+                    }
+                    else
+                    {
+                        risp = "L'andamento da lei inserito non è valido";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                risp = "Errore";
+            }  
+
+            return risp;
+        }
     }
 }
