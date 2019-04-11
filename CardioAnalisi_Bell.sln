@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquazioniLibrary_Bell", "EquazioniLibrary_Bell\EquazioniLibrary_Bell.csproj", "{CBA5A836-6BA0-4714-9E54-75FC1710426D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataCardio_Bell.Test", "DataCardio_Bell.Test\DataCardio_Bell.Test.csproj", "{87FDFAA3-3306-4DC3-8A8B-BD1D69E4C02A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBA5A836-6BA0-4714-9E54-75FC1710426D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBA5A836-6BA0-4714-9E54-75FC1710426D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBA5A836-6BA0-4714-9E54-75FC1710426D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBA5A836-6BA0-4714-9E54-75FC1710426D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87FDFAA3-3306-4DC3-8A8B-BD1D69E4C02A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87FDFAA3-3306-4DC3-8A8B-BD1D69E4C02A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87FDFAA3-3306-4DC3-8A8B-BD1D69E4C02A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87FDFAA3-3306-4DC3-8A8B-BD1D69E4C02A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53A93618-0ACF-4957-8751-60662C25E464}
+	EndGlobalSection
+EndGlobal
