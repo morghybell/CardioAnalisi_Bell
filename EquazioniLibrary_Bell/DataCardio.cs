@@ -217,8 +217,6 @@ namespace EquazioniLibrary_Bell
 
             return risp;
         }
-
-        
         
     }
 }
