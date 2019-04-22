@@ -207,6 +207,13 @@ namespace DataCardio_Bell.Test
 
         //testo i valori della spesa energetica
         [DataRow("95", "80,3", "66", "72", "77", "62,1", "75,4")]
+        [DataRow("95", "-80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("-95", "80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "-72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "-77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "77", "-62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "-80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
         [TestMethod]
         public void MediaDBC(string B1, string B2, string B3, string B4, string B5, string B6, string Atteso)
         {
@@ -223,9 +230,42 @@ namespace DataCardio_Bell.Test
             Assert.AreEqual(MDBC_Attesa, MDCB_Calcolata);
         }
 
+        //testo l'ordine crescente dei battiti (non doovrebbe funzionare a causa dell'array)
+        [DataRow("95", "80,3", "66", "72", "77", "62,1", "62,1; 66; 72; 77; 80,3; 95")]
+        [DataRow("95", "-80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("-95", "80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "-72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "-77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "77", "-62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "-80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [TestMethod]
+        public void OrdineCB(string B1, string B2, string B3, string B4, string B5, string B6, string Atteso)
+        {
+            string Battito1 = B1;
+            string Battito2 = B2;
+            string Battito3 = B3;
+            string Battito4 = B4;
+            string Battito5 = B5;
+            string Battito6 = B6;
+            string MDBC_Attesa = Atteso;
+
+            string MDCB_Calcolata = EquazioniLibrary_Bell.DataCardio.OrdineCB(Battito1, Battito2, Battito3, Battito4, Battito5, Battito6);
+
+            Assert.AreEqual(MDBC_Attesa, MDCB_Calcolata);
+        }
+
         //testo i valori del fabbisogno energetico
         [DataRow("F", "57", "30", "160", "M", "2073,10116")]
         [DataRow("M", "77", "30", "175", "M", "3054,9")]
+        [DataRow("B", "77", "30", "175", "M", "Il genere da lei inserito non è valido")]
+        [DataRow("M", "F", "30", "175", "M", "Errore")]
+        [DataRow("F", "77", "30", "-175", "M", "L'altezza da lei inserita è negativa")]
+        [DataRow("F", "-75", "5", "30", "30", "Il peso da lei inserito è negativo")]
+        [DataRow("F", "75", "-57", "-5", "30", "L'età da lei inserita è negativa")]
+        [DataRow("M", "75", "57", "30", "-5", "Il Tipo di Vita da lei inserito non è valido")]
+        [DataRow("F", "2", "2", "2", "2", "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti")]
+        [DataRow("M", "2", "2", "2", "2", "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti")]
         [TestMethod]
         public void FabbisognoE(string S, string P, string E, string A, string TV, string Atteso)
         {

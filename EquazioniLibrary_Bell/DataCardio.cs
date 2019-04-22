@@ -284,9 +284,16 @@ namespace EquazioniLibrary_Bell
                 double B5 = Convert.ToDouble(Battito5);
                 double B6 = Convert.ToDouble(Battito6);
 
-                double media = (B1 + B2 + B3 + B4 + B5 + B6) / 6;
+                if (B1 <= 0 || B2 <= 0 || B3 <= 0 || B4 <= 0 || B5 <= 0 || B6 <= 0)
+                {
+                    risp = "I battiti da lei inseriti sono negativi";
+                }
+                else
+                {
+                    double media = (B1 + B2 + B3 + B4 + B5 + B6) / 6;
 
-                risp = Convert.ToString(media);
+                    risp = Convert.ToString(media);
+                }  
             }
             catch
             {
@@ -319,12 +326,41 @@ namespace EquazioniLibrary_Bell
         }
 
         //5 ordine crescente dei battiti
-        public static string OrdineCB()
+        public static string OrdineCB(string Battito1, string Battito2, string Battito3, string Battito4, string Battito5, string Battito6)
         {
             string risp = "";
+            double[] battiti = new double[5];
 
+            try
+            {
+                double B1 = Convert.ToDouble(Battito1);
+                double B2 = Convert.ToDouble(Battito2);
+                double B3 = Convert.ToDouble(Battito3);
+                double B4 = Convert.ToDouble(Battito4);
+                double B5 = Convert.ToDouble(Battito5);
+                double B6 = Convert.ToDouble(Battito6);
 
+                if (B1 <= 0 || B2 <= 0 || B3 <= 0 || B4 <= 0 || B5 <= 0 || B6 <= 0)
+                {
+                    risp = "I battiti da lei inseriti sono negativi";
+                }
+                else
+                {
+                    battiti[0] = B1;
+                    battiti[1] = B2;
+                    battiti[2] = B3;
+                    battiti[3] = B4;
+                    battiti[4] = B5;
+                    battiti[5] = B6;
 
+                    Array.Sort(battiti);
+                    risp = Convert.ToString(battiti);
+                }
+            }
+            catch
+            {
+                risp = "Errore";
+            }
 
             return risp;
         }
@@ -341,19 +377,19 @@ namespace EquazioniLibrary_Bell
                 double E = Convert.ToDouble(Eta);
                 double A = Convert.ToDouble(Altezza);
 
-                if (A < 0 || P < 0 || E < 0)
+                if (A <= 0 || P <= 0 || E <= 0)
                 {
-                    if (A < 0)
+                    if (A <= 0)
                     {
                         risp = "L'altezza da lei inserita è negativa";
                     }
 
-                    if (P < 0)
+                    if (P <= 0)
                     {
                         risp = "Il peso da lei inserito è negativo";
                     }
 
-                    if (E < 0)
+                    if (E <= 0)
                     {
                         risp = "L'età da lei inserita è negativa";
                     }
@@ -400,7 +436,7 @@ namespace EquazioniLibrary_Bell
                             }
                             else
                             {
-                                risp = "il Tipo di Vita da lei inserito non è valido";
+                                risp = "Il Tipo di Vita da lei inserito non è valido";
                             }
                         }
                     }
