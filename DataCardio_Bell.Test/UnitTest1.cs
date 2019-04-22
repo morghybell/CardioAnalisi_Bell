@@ -205,6 +205,41 @@ namespace DataCardio_Bell.Test
             Assert.AreEqual(SE_Attesa, SE_Calcolata);
         }
 
-        
+        //testo i valori della spesa energetica
+        [DataRow("95", "80,3", "66", "72", "77", "62,1", "75,4")]
+        [TestMethod]
+        public void MediaDBC(string B1, string B2, string B3, string B4, string B5, string B6, string Atteso)
+        {
+            string Battito1 = B1;
+            string Battito2 = B2;
+            string Battito3 = B3;
+            string Battito4 = B4;
+            string Battito5 = B5;
+            string Battito6 = B6;
+            string MDBC_Attesa = Atteso;
+
+            string MDCB_Calcolata = EquazioniLibrary_Bell.DataCardio.MediaDBC(Battito1, Battito2, Battito3, Battito4, Battito5, Battito6);
+
+            Assert.AreEqual(MDBC_Attesa, MDCB_Calcolata);
+        }
+
+        //testo i valori del fabbisogno energetico
+        [DataRow("F", "57", "30", "160", "M", "2073,10116")]
+        [DataRow("M", "77", "30", "175", "M", "3054,9")]
+        [TestMethod]
+        public void FabbisognoE(string S, string P, string E, string A, string TV, string Atteso)
+        {
+            string Sesso = S;
+            string Peso = P;
+            string Eta = E;
+            string Altezza = A;
+            string TipoVita = TV;
+            string FE_Atteso = Atteso;
+
+            string FE_Calcolato = EquazioniLibrary_Bell.DataCardio.FabbisognoE(Sesso, Peso, Eta, Altezza, TipoVita);
+
+            Assert.AreEqual(FE_Atteso, FE_Calcolato);
+        }
+
     }
 }

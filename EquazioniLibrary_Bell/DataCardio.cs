@@ -179,7 +179,7 @@ namespace EquazioniLibrary_Bell
 
                         if (Calorie_Bruciate < 0)
                         {
-                            risp = "Le calorie bruciate risultano negative, i dati non sono corretti";
+                            risp = "Le calorie bruciate risultano negative, i dati inseriti non sono corretti";
                         }
                         else
                         {
@@ -197,7 +197,7 @@ namespace EquazioniLibrary_Bell
 
                         if (Calorie_Bruciate < 0)
                         {
-                            risp = "Le calorie bruciate risultano negative, i dati non sono corretti";
+                            risp = "Le calorie bruciate risultano negative, i dati inseriti non sono corretti";
                         }
                         else
                         {
@@ -265,7 +265,193 @@ namespace EquazioniLibrary_Bell
             catch (Exception)
             {
                 risp = "Errore";
-            }  
+            }
+
+            return risp;
+        }
+
+        //5 calcolo della media giornaliera dei battiti cardiaci
+        public static string MediaDBC(string Battito1, string Battito2, string Battito3, string Battito4, string Battito5, string Battito6)
+        {
+            string risp = "";
+
+            try
+            {
+                double B1 = Convert.ToDouble(Battito1);
+                double B2 = Convert.ToDouble(Battito2);
+                double B3 = Convert.ToDouble(Battito3);
+                double B4 = Convert.ToDouble(Battito4);
+                double B5 = Convert.ToDouble(Battito5);
+                double B6 = Convert.ToDouble(Battito6);
+
+                double media = (B1 + B2 + B3 + B4 + B5 + B6) / 6;
+
+                risp = Convert.ToString(media);
+            }
+            catch
+            {
+                risp = "Errore";
+            }
+
+            return risp;
+        }
+
+        //5 calcolo battito cardiaco a riposo
+        public static string BCRiposo()
+        {
+            string risp = "";
+
+
+
+
+            return risp;
+        }
+
+        //5 variabilità del battito cardiaco
+        public static string VariabilitàBC()
+        {
+            string risp = "";
+
+
+
+
+            return risp;
+        }
+
+        //5 ordine crescente dei battiti
+        public static string OrdineCB()
+        {
+            string risp = "";
+
+
+
+
+            return risp;
+        }
+
+        //6 fabbisogno energetico
+        public static string FabbisognoE(string Sesso, string Peso, string Eta, string Altezza, string TipoVita)
+        {
+            string risp = "";
+            double fattore = 0;
+
+            try
+            {
+                double P = Convert.ToDouble(Peso);
+                double E = Convert.ToDouble(Eta);
+                double A = Convert.ToDouble(Altezza);
+
+                if (A < 0 || P < 0 || E < 0)
+                {
+                    if (A < 0)
+                    {
+                        risp = "L'altezza da lei inserita è negativa";
+                    }
+
+                    if (P < 0)
+                    {
+                        risp = "Il peso da lei inserito è negativo";
+                    }
+
+                    if (E < 0)
+                    {
+                        risp = "L'età da lei inserita è negativa";
+                    }
+                }
+                else
+                {
+                    double Fabbisogno_Energetico = 0;
+
+                    if (Sesso == "M")
+                    {
+                        Fabbisogno_Energetico = 66.5 + (13.75 * P) + (5 * A) - (6.775 * E);
+                        //66.5 + (13.75 * 77) + (5 * 175) - (6.775 * 30)
+                        //66.5 + (1058.75) + (875) - (203,25)
+                        //1797
+
+                        if (Fabbisogno_Energetico < 0)
+                        {
+                            risp = "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti";
+                        }
+                        else
+                        {
+                            if (TipoVita != "L" && TipoVita != "M" && TipoVita != "H")
+                            {
+                                switch (TipoVita)
+                                {
+                                    case "L":
+                                        fattore = 1.41;
+                                        break;
+
+                                    case "M":
+                                        fattore = 1.7;
+                                        break;
+
+                                    case "H":
+                                        fattore = 2.01;
+                                        break;
+                                }
+
+                                Fabbisogno_Energetico = Fabbisogno_Energetico * fattore;
+                                //1797 * 1.7
+                                //3054,9
+
+                                risp = Convert.ToString(Fabbisogno_Energetico);
+                            }
+                            else
+                            {
+                                risp = "il Tipo di Vita da lei inserito non è valido";
+                            }
+                        }
+                    }
+                    else if (Sesso == "F")
+                    {
+                        Fabbisogno_Energetico = 655.1 + (9.563 * P) + (1.85 * A) - (4.676 * E);
+                        //655.1 + (9.563 * 57) + (1.85 * 160) - (4.676 * 30)
+                        //655.1 + (545.091) + (296) - (140.28)
+                        //1328,911
+
+                        if (Fabbisogno_Energetico < 0)
+                        {
+                            risp = "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti";
+                        }
+                        else
+                        {
+                            if (TipoVita != "L" && TipoVita != "M" && TipoVita != "H")
+                            {
+                                switch (TipoVita)
+                                {
+                                    case "L":
+                                        fattore = 1.42;
+                                        break;
+
+                                    case "M":
+                                        fattore = 1.56;
+                                        break;
+
+                                    case "H":
+                                        fattore = 1.73;
+                                        break;
+                                }
+
+                                Fabbisogno_Energetico = Fabbisogno_Energetico * fattore;
+                                //1328,911 * 1.56
+                                //2073,10116
+
+                                risp = Convert.ToString(Fabbisogno_Energetico);
+                            }
+                            else
+                            {
+                                risp = "il Tipo di Vita da lei inserito non è valido";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                risp = "Errore";
+            }
 
             return risp;
         }
