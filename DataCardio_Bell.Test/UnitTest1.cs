@@ -281,5 +281,45 @@ namespace DataCardio_Bell.Test
             Assert.AreEqual(FE_Atteso, FE_Calcolato);
         }
 
+        //testo i valori del peso forma
+        [DataRow("F", "17", "160", "55,53")]
+        [DataRow("M", "17", "170", "71,7")]
+        [DataRow("B", "17", "160", "Il genere da lei inserito non è valido")]
+        [DataRow("M", "17", "M", "Errore")]
+        [DataRow("F", "17", "-160", "L'altezza da lei inserita è negativa")]
+        [DataRow("F", "-17", "160", "L'età da lei inserita è negativa")]
+        [DataRow("F", "2", "2", "Il Peso Forma risulta negativo, i dati inseriti non sono corretti")]
+        [DataRow("M", "2", "2", "Il Peso Forma risulta negativo, i dati inseriti non sono corretti")]
+        [TestMethod]
+        public void FabbisognoE(string S, string E, string A, string Atteso)
+        {
+            string Sesso = S;
+            string Eta = E;
+            string Altezza = A;
+            string PS_Atteso = Atteso;
+
+            string PS_Calcolato = EquazioniLibrary_Bell.DataCardio.PesoForma(Sesso, Eta, Altezza);
+
+            Assert.AreEqual(PS_Atteso, PS_Calcolato);
+        }
+
+        //testo i valori di perdere peso
+        [DataRow("-65", "56", "Il peso da lei inserito è negativo")]
+        [DataRow("65", "-56", "Il peso forma da lei inserito è negativo")]
+        [DataRow("65", "56", "9")]
+        [DataRow("56", "65", "Lei è sottopeso rispetto al suo peso ideale")]
+        [DataRow("56", "56", "Lei è perfettamente in linea con il suo peso ideale")]
+        [DataRow("F", "56", "Errore")]
+        [TestMethod]
+        public void FabbisognoE(string P, string PS, string Atteso)
+        {
+            string Peso = P;
+            string PesoForma = PS;
+            string PP_Atteso = Atteso;
+
+            string PP_Calcolato = EquazioniLibrary_Bell.DataCardio.PerderePeso(Peso, PesoForma);
+
+            Assert.AreEqual(PP_Atteso, PP_Calcolato);
+        }
     }
 }

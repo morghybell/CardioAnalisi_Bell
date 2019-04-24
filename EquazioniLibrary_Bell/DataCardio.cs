@@ -491,5 +491,117 @@ namespace EquazioniLibrary_Bell
 
             return risp;
         }
+
+        //6 peso forma
+        public static string PesoForma(string Sesso, string Eta, string Altezza)
+        {
+            string risp = "";
+
+            try
+            {
+                double E = Convert.ToDouble(Eta);
+                double A = Convert.ToDouble(Altezza);
+
+                if (A <= 0 || E <= 0)
+                {
+                    if (A <= 0)
+                    {
+                        risp = "L'altezza da lei inserita è negativa";
+                    }    
+
+                    if (E <= 0)
+                    {
+                        risp = "L'età da lei inserita è negativa";
+                    }
+                }
+                else
+                {
+                    double Peso_Forma = 0;
+
+                    if (Sesso == "M")
+                    {
+                        Peso_Forma = (A - 100) + (E / 10);
+
+                        if (Peso_Forma < 0)
+                        {
+                            risp = "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti";
+                        }
+                        else
+                        {
+                            risp = Convert.ToString(Peso_Forma);
+                        }
+                    }
+                    else if (Sesso == "F")
+                    {
+                        Peso_Forma = ((A - 100) + (E / 10)) * 0.9;
+
+                        if (Peso_Forma < 0)
+                        {
+                            risp = "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti";
+                        }
+                        else
+                        {
+                            risp = Convert.ToString(Peso_Forma);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                risp = "Errore";
+            }
+
+            return risp;
+        }
+
+        //6 perdere peso
+        public static string PerderePeso(string Peso, string PesoForma)
+        {
+            string risp = "";
+
+            try
+            {
+                double P = Convert.ToDouble(Peso);
+                double PS = Convert.ToDouble(PesoForma);
+
+                if (P <= 0 || PS <= 0)
+                {
+                    if (P <= 0)
+                    {
+                        risp = "Il peso da lei inserito è negativo";
+                    }
+
+                    if (PS <= 0)
+                    {
+                        risp = "Il peso forma da lei inserito è negativo";
+                    }
+                }
+                else
+                {
+                    double differenza = 0;
+
+                    differenza = P - PS;
+
+                    if (differenza < 0)
+                    {
+                        risp = "Lei è sottopeso rispetto al suo peso ideale";
+                    }
+                    else if (differenza == 0)
+                    {
+                        risp = "Lei è perfettamente in linea con il suo peso ideale";
+                    }
+                    else if (differenza > 0)
+                    {
+                        risp = Convert.ToString(differenza);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                risp = "Errore";
+            }
+
+            return risp;
+        }
     }
 }
