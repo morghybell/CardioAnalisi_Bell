@@ -230,29 +230,64 @@ namespace DataCardio_Bell.Test
             Assert.AreEqual(MDBC_Attesa, MDCB_Calcolata);
         }
 
-        //testo l'ordine crescente dei battiti (non doovrebbe funzionare a causa dell'array)
-        [DataRow("95", "80,3", "66", "72", "77", "62,1", "62,1; 66; 72; 77; 80,3; 95")]
-        [DataRow("95", "-80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("-95", "80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "80,3", "66", "-72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "80,3", "66", "72", "-77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "80,3", "66", "72", "77", "-62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "-80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        //testo il battito cardiaco a riposo
         [TestMethod]
-        public void OrdineCB(string B1, string B2, string B3, string B4, string B5, string B6, string Atteso)
+        public void BCRiposo()
         {
-            string Battito1 = B1;
-            string Battito2 = B2;
-            string Battito3 = B3;
-            string Battito4 = B4;
-            string Battito5 = B5;
-            string Battito6 = B6;
-            string MDBC_Attesa = Atteso;
+            string[] battiti = new string[6];
 
-            string MDCB_Calcolata = EquazioniLibrary_Bell.DataCardio.OrdineCB(Battito1, Battito2, Battito3, Battito4, Battito5, Battito6);
+            battiti[0] = "70";
+            battiti[1] = "72";
+            battiti[2] = "66";
+            battiti[3] = "77";
+            battiti[4] = "71";
+            battiti[5] = "68";
 
-            Assert.AreEqual(MDBC_Attesa, MDCB_Calcolata);
+            string media_Attesa = "70,666666666666";
+
+            string media_Calcolata = EquazioniLibrary_Bell.DataCardio.BCRiposo(battiti);
+
+            Assert.AreEqual(media_Attesa, media_Calcolata);
+        }
+
+        //testo la variabilità del battito cardiaco
+        [TestMethod]
+        public void VariabilitàBC()
+        {
+            string[] battiti = new string[6];
+
+            battiti[0] = "95";
+            battiti[1] = "80,3";
+            battiti[2] = "66";
+            battiti[3] = "72";
+            battiti[4] = "77";
+            battiti[5] = "62.1";
+
+            string variabilità_Attesa = "32,9";
+
+            string variabilità_Calcolata = EquazioniLibrary_Bell.DataCardio.VariabilitàBC(battiti);
+
+            Assert.AreEqual(variabilità_Attesa, variabilità_Attesa);
+        }
+
+        //testo l'ordine crescente dei battiti
+        [TestMethod]
+        public void OrdineCB()
+        {
+            string[] battiti = new string[6];
+
+            battiti[0] = "95";
+            battiti[1] = "80,3";
+            battiti[2] = "66";
+            battiti[3] = "72";
+            battiti[4] = "77";
+            battiti[5] = "62.1";
+
+            string ordine_Atteso = "62,1; 62,1; 66; 72; 77; 80,3; 95 ";
+
+            string ordine_Calcolato = EquazioniLibrary_Bell.DataCardio.OrdineCB(battiti);
+
+            Assert.AreEqual(ordine_Calcolato, ordine_Atteso);
         }
 
         //testo i valori del fabbisogno energetico
@@ -323,3 +358,15 @@ namespace DataCardio_Bell.Test
         }
     }
 }
+
+
+/*
+ *         [DataRow("95", "80,3", "66", "72", "77", "62,1", "62,1; 66; 72; 77; 80,3; 95")]
+        [DataRow("95", "-80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("-95", "80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "-72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "-77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "77", "-62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "-80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+*/

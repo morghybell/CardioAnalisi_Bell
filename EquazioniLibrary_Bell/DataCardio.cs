@@ -304,57 +304,110 @@ namespace EquazioniLibrary_Bell
         }
 
         //5 calcolo battito cardiaco a riposo
-        public static string BCRiposo()
+        public static string BCRiposo(string[] battitiS)
         {
             string risp = "";
-
-
-
-
-            return risp;
-        }
-
-        //5 variabilità del battito cardiaco
-        public static string VariabilitàBC()
-        {
-            string risp = "";
-
-
-
-
-            return risp;
-        }
-
-        //5 ordine crescente dei battiti
-        public static string OrdineCB(string Battito1, string Battito2, string Battito3, string Battito4, string Battito5, string Battito6)
-        {
-            string risp = "";
-            double[] battiti = new double[5];
+            double[] battitiD = new double[6];
+            double media = 0;
 
             try
             {
-                double B1 = Convert.ToDouble(Battito1);
-                double B2 = Convert.ToDouble(Battito2);
-                double B3 = Convert.ToDouble(Battito3);
-                double B4 = Convert.ToDouble(Battito4);
-                double B5 = Convert.ToDouble(Battito5);
-                double B6 = Convert.ToDouble(Battito6);
+                battitiD[0] = Convert.ToDouble(battitiS[0]);
+                battitiD[1] = Convert.ToDouble(battitiS[1]);
+                battitiD[2] = Convert.ToDouble(battitiS[2]);
+                battitiD[3] = Convert.ToDouble(battitiS[3]);
+                battitiD[4] = Convert.ToDouble(battitiS[4]);
+                battitiD[5] = Convert.ToDouble(battitiS[5]);
 
-                if (B1 <= 0 || B2 <= 0 || B3 <= 0 || B4 <= 0 || B5 <= 0 || B6 <= 0)
+                if (battitiD[0] <= 0 || battitiD[1] <= 0 || battitiD[2] <= 0 || battitiD[3] <= 0 || battitiD[4] <= 0 || battitiD[5] <= 0)
                 {
                     risp = "I battiti da lei inseriti sono negativi";
                 }
                 else
                 {
-                    battiti[0] = B1;
-                    battiti[1] = B2;
-                    battiti[2] = B3;
-                    battiti[3] = B4;
-                    battiti[4] = B5;
-                    battiti[5] = B6;
+                    media = ((battitiD[0] + battitiD[1] + battitiD[2] + battitiD[3] + battitiD[4] + battitiD[5]) * 4) / 24;
 
-                    Array.Sort(battiti);
-                    risp = Convert.ToString(battiti);
+                    risp = Convert.ToString(media);
+                }
+            }
+            catch
+            {
+                risp = "Errore";
+            }
+
+            return risp;
+        }
+
+        //5 variabilità del battito cardiaco
+        public static string VariabilitàBC(string[] battitiS)
+        {
+            string risp = "";
+            double[] battitiD = new double[6];
+            double max = 0;
+            double min = 0;
+            double variabilità = 0;
+
+            try
+            {
+                battitiD[0] = Convert.ToDouble(battitiS[0]);
+                battitiD[1] = Convert.ToDouble(battitiS[1]);
+                battitiD[2] = Convert.ToDouble(battitiS[2]);
+                battitiD[3] = Convert.ToDouble(battitiS[3]);
+                battitiD[4] = Convert.ToDouble(battitiS[4]);
+                battitiD[5] = Convert.ToDouble(battitiS[5]);
+
+                if (battitiD[0] <= 0 || battitiD[1] <= 0 || battitiD[2] <= 0 || battitiD[3] <= 0 || battitiD[4] <= 0 || battitiD[5] <= 0)
+                {
+                    risp = "I battiti da lei inseriti sono negativi";
+                }
+                else
+                {
+                    Array.Sort(battitiD);
+                    max = battitiD[0];
+                    min = battitiD[5];
+                    variabilità = max - min;
+
+                    risp = Convert.ToString(variabilità);
+                }
+            }
+            catch
+            {
+                risp = "Errore";
+            }
+
+            return risp;
+        }
+
+        //5 ordine crescente dei battiti
+        public static string OrdineCB(string[] battitiS)
+        {
+            string risp = "";
+            double[] battitiD = new double[6];
+            string frase = "";
+
+            try
+            {
+                battitiD[0] = Convert.ToDouble(battitiS[0]);
+                battitiD[1] = Convert.ToDouble(battitiS[1]);
+                battitiD[2] = Convert.ToDouble(battitiS[2]);
+                battitiD[3] = Convert.ToDouble(battitiS[3]);
+                battitiD[4] = Convert.ToDouble(battitiS[4]);
+                battitiD[5] = Convert.ToDouble(battitiS[5]);
+
+                if (battitiD[0] <= 0 || battitiD[1] <= 0 || battitiD[2] <= 0 || battitiD[3] <= 0 || battitiD[4] <= 0 || battitiD[5] <= 0)
+                {
+                    risp = "I battiti da lei inseriti sono negativi";
+                }
+                else
+                { 
+                    Array.Sort(battitiD);
+
+                    for (int i = 0; i < battitiD.Length; i++)
+                    {
+                        frase = battitiD[i] + " ";
+                    }
+
+                    risp = frase;
                 }
             }
             catch
