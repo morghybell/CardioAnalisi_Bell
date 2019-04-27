@@ -8,106 +8,120 @@ namespace EquazioniLibrary_Bell
 {
     public class DataCardio
     {
+        //FUNZIONALITÀ 1
         //calcolo la frequenza cardiaca massima
         public static string FrequenzaCMax(string eta)
         {
-            string FCM = "";
+            //inizializzo la variabile di ritorno
+            string risp = "";
 
             try
             {
-                double numero = Convert.ToDouble(eta);
+                //converto l'età da tipo string a double
+                double E = Convert.ToDouble(eta);
 
-                if (numero <= 0)
+                //controllo se l'età inserita è negativa
+                if (E <= 0)
                 {
-                    FCM = "Errore";
+                    risp = "Errore";
                 }
                 else
                 {
-                    double FCMax = 220 - numero;
-
-                    FCM = Convert.ToString(FCMax);
+                    //calcolo la frequenza cardiaca massima
+                    double FCMax = 220 - E;
+                    risp = Convert.ToString(FCMax);
                 }
             }
             catch (Exception)
             {
-                FCM = "Errore";
+                risp = "Errore";
             }
 
-            return FCM;
+            return risp;
         }
 
         //calcolo il numero dei battiti minimi
         public static string NBattitiMin(string FCMax)
         {
-            string BM = "";
+            //inizializzo la variabile di ritorno
+            string risp = "";
 
             try
             {
+                //converto la frequenza cardiaca massima da tipo string a double
                 double FCM = Convert.ToDouble(FCMax);
 
+                //controllo se la frequenza cardiaca massima inserita è negativa
                 if (FCM <= 0)
                 {
-                    BM = "Errore";
+                    risp = "Errore";
                 }
                 else
                 {
+                    //calcolo il numero dei battiti minimi
                     double BMin = FCM * 0.7;
-
-                    BM = Convert.ToString(BMin);
+                    risp = Convert.ToString(BMin);
                 }
             }
             catch (Exception)
             {
-                BM = "Errore";
+                risp = "Errore";
             }
 
-            return BM;
+            return risp;
         }
 
         //calcolo il numero dei battiti massimi
         public static string NBattitiMax(string FCMax)
         {
-            string BM = "";
-
-            try
-            {
-                double FCM = Convert.ToDouble(FCMax);
-
-                if (FCM <= 0)
-                {
-                    BM = "Errore";
-                }
-                else
-                {
-                    double BMax = FCM * 0.9;
-
-                    BM = Convert.ToString(BMax);
-                }
-            }
-            catch (Exception)
-            {
-                BM = "Errore";
-            }
-
-            return BM;
-        }
-
-        //interpreto i valori di frequenza cardiaca a riposo
-        public static string FCRiposo(string FCRiposo)
-        {
+            //inizializzo la variabile di ritorno
             string risp = "";
 
             try
             {
+                //converto la frequenza cardiaca massima da tipo string a double
+                double FCM = Convert.ToDouble(FCMax);
+
+                //controllo se la frequenza cardiaca massima inserita è negativa
+                if (FCM <= 0)
+                {
+                    risp = "Errore";
+                }
+                else
+                {
+                    //calcolo il numero dei battiti massimi
+                    double BMax = FCM * 0.9;
+                    risp = Convert.ToString(BMax);
+                }
+            }
+            catch (Exception)
+            {
+                risp = "Errore";
+            }
+
+            return risp;
+        }
+
+        //FUNZIONALITÀ 2
+        //interpreto i valori di frequenza cardiaca a riposo
+        public static string FCRiposo(string FCRiposo)
+        {
+            //inizializzo la variabile di ritorno
+            string risp = "";
+
+            try
+            {
+                //converto la frequenza cardiaca a riposo da tipo string a double
                 double FCR = Convert.ToDouble(FCRiposo);
 
+                //controllo se la frequenza cardiaca a riposo inserita è negativa
                 if (FCR <= 0)
                 {
                     risp = "Errore";
                 }
                 else
                 {
-
+                    //confronto la frequenza cardiaca a riposo con i valori standard
                     if (FCR < 60)
                     {
                         risp = "Bradicardia";
@@ -130,18 +144,22 @@ namespace EquazioniLibrary_Bell
             return risp;
         }
 
+        //FUNZIONALITÀ 3
         //calcolo le calorie bruciate
         public static string CBruciate(string Sesso, string FCardiaca, string Peso, string Eta, string Tempo)
         {
+            //inizializzo la variabile di ritorno
             string risp = "";
 
             try
             {
+                //converto la frequenza cardiaca, il peso, l'età e il tempo da tipo string a double
                 double FC = Convert.ToDouble(FCardiaca);
                 double P = Convert.ToDouble(Peso);
                 double E = Convert.ToDouble(Eta);
                 double T = Convert.ToDouble(Tempo);
 
+                //controllo se le variabili sopra elencate hanno valore negativo e restituisco messaggi specifiche
                 if (FC < 0 || P < 0 || E < 0 || T < 0)
                 {
                     if (FC < 0)
@@ -166,8 +184,11 @@ namespace EquazioniLibrary_Bell
                 }
                 else
                 {
+                    //tutti i parametri in input sono corretti
+                    //inizializzo la variabile di appoggio dove inserirò il risulato del calcolo
                     double Calorie_Bruciate = 0;
 
+                    //controllo se il sesso inserito dall'utente è maschio=M, femmina=F, oppure se non è nessuno dei due restituisco un messaggio
                     if (Sesso == "M")
                     {
                         Calorie_Bruciate = ((E * 0.2017) + (P * 0.199) + (FC * 0.6309) - 55.0969) * T / 4.184;
@@ -177,6 +198,7 @@ namespace EquazioniLibrary_Bell
                         //10.4401 * 30 / 4.184;
                         //313,203 / 4.184;
 
+                        //controllo se il risultato del calcolo è negativo
                         if (Calorie_Bruciate < 0)
                         {
                             risp = "Le calorie bruciate risultano negative, i dati inseriti non sono corretti";
@@ -195,6 +217,7 @@ namespace EquazioniLibrary_Bell
                         //8.1758 * 30 / 4.184;
                         //245.274 / 4.184;
 
+                        //controllo se il risultato del calcolo è negativo
                         if (Calorie_Bruciate < 0)
                         {
                             risp = "Le calorie bruciate risultano negative, i dati inseriti non sono corretti";
@@ -218,16 +241,20 @@ namespace EquazioniLibrary_Bell
             return risp;
         }
 
+        //FUNZIONALITÀ 4
         //calcolo le spesa energetica
         public static string SEnergetica(string Passo, string Spazio, string Peso)
         {
+            //inizializzo la variabile di ritorno
             string risp = "";
 
             try
             {
+                //converto lo spazio e il peso da tipo string a double
                 double S = Convert.ToDouble(Spazio);
                 double P = Convert.ToDouble(Peso);
 
+                //controllo se le variabili sopra elencate hanno valore negativo e restituisco messaggi specifiche
                 if (P < 0 || S < 0)
                 {
                     if (S < 0)
@@ -242,8 +269,11 @@ namespace EquazioniLibrary_Bell
                 }
                 else
                 {
+                    //tutti i parametri in input sono corretti
+                    //inizializzo la variabile di appoggio dove inserirò il risulato del calcolo
                     double SEnergetica = 0;
 
+                    //controllo quale tipo di andamento è stato inserito e se non è presente tra quelli in lista restituisco un messaggio
                     if (Passo == "corsa")
                     {
                         SEnergetica = 0.9 * S * P;
@@ -270,48 +300,20 @@ namespace EquazioniLibrary_Bell
             return risp;
         }
 
-        //5 calcolo della media giornaliera dei battiti cardiaci
-        public static string MediaDBC(string Battito1, string Battito2, string Battito3, string Battito4, string Battito5, string Battito6)
+        //FUNZIONALITÀ 5
+        //calcolo della media giornaliera dei battiti cardiaci
+        public static string MediaDBC(string[] battitiS)
         {
+            //inizializzo la variabile di ritorno
             string risp = "";
 
-            try
-            {
-                double B1 = Convert.ToDouble(Battito1);
-                double B2 = Convert.ToDouble(Battito2);
-                double B3 = Convert.ToDouble(Battito3);
-                double B4 = Convert.ToDouble(Battito4);
-                double B5 = Convert.ToDouble(Battito5);
-                double B6 = Convert.ToDouble(Battito6);
-
-                if (B1 <= 0 || B2 <= 0 || B3 <= 0 || B4 <= 0 || B5 <= 0 || B6 <= 0)
-                {
-                    risp = "I battiti da lei inseriti sono negativi";
-                }
-                else
-                {
-                    double media = (B1 + B2 + B3 + B4 + B5 + B6) / 6;
-
-                    risp = Convert.ToString(media);
-                }  
-            }
-            catch
-            {
-                risp = "Errore";
-            }
-
-            return risp;
-        }
-
-        //5 calcolo battito cardiaco a riposo
-        public static string BCRiposo(string[] battitiS)
-        {
-            string risp = "";
+            //inizializzo il nuovo array di tipo double
             double[] battitiD = new double[6];
             double media = 0;
 
             try
             {
+                //converto i dati presenti nell'arrey di stringhe in double e li inserisco in un nuovo array dello stesso tipo
                 battitiD[0] = Convert.ToDouble(battitiS[0]);
                 battitiD[1] = Convert.ToDouble(battitiS[1]);
                 battitiD[2] = Convert.ToDouble(battitiS[2]);
@@ -319,14 +321,15 @@ namespace EquazioniLibrary_Bell
                 battitiD[4] = Convert.ToDouble(battitiS[4]);
                 battitiD[5] = Convert.ToDouble(battitiS[5]);
 
+                //controllo se i dati inseriti nell'array sono negativi
                 if (battitiD[0] <= 0 || battitiD[1] <= 0 || battitiD[2] <= 0 || battitiD[3] <= 0 || battitiD[4] <= 0 || battitiD[5] <= 0)
                 {
                     risp = "I battiti da lei inseriti sono negativi";
                 }
                 else
                 {
-                    media = ((battitiD[0] + battitiD[1] + battitiD[2] + battitiD[3] + battitiD[4] + battitiD[5]) * 4) / 24;
-
+                    //calcolo la media
+                    media = (battitiD[0] + battitiD[1] + battitiD[2] + battitiD[3] + battitiD[4] + battitiD[5]) / 6;
                     risp = Convert.ToString(media);
                 }
             }
@@ -338,10 +341,53 @@ namespace EquazioniLibrary_Bell
             return risp;
         }
 
-        //5 variabilità del battito cardiaco
+        //calcolo battito cardiaco a riposo
+        public static string BCRiposo(string[] battitiS)
+        {
+            //inizializzo la variabile di ritorno
+            string risp = "";
+
+            //inizializzo il nuovo array di tipo double
+            double[] battitiD = new double[6];
+            double media = 0;
+
+            try
+            {
+                //converto i dati presenti nell'arrey di stringhe in double e li inserisco in un nuovo array dello stesso tipo
+                battitiD[0] = Convert.ToDouble(battitiS[0]);
+                battitiD[1] = Convert.ToDouble(battitiS[1]);
+                battitiD[2] = Convert.ToDouble(battitiS[2]);
+                battitiD[3] = Convert.ToDouble(battitiS[3]);
+                battitiD[4] = Convert.ToDouble(battitiS[4]);
+                battitiD[5] = Convert.ToDouble(battitiS[5]);
+
+                //controllo se i dati inseriti nell'array sono negativi
+                if (battitiD[0] <= 0 || battitiD[1] <= 0 || battitiD[2] <= 0 || battitiD[3] <= 0 || battitiD[4] <= 0 || battitiD[5] <= 0)
+                {
+                    risp = "I battiti da lei inseriti sono negativi";
+                }
+                else
+                {
+                    //moltiplico i battiti inseriti per quattro (poichè una volta misurati almeno 6 battiti per 15 secondi essi si ripetono costanti per un minuto) e ne calcolo la media
+                    media = ((battitiD[0] + battitiD[1] + battitiD[2] + battitiD[3] + battitiD[4] + battitiD[5]) * 4) / 24;
+                    risp = Convert.ToString(media);
+                }
+            }
+            catch
+            {
+                risp = "Errore";
+            }
+
+            return risp;
+        }
+
+        //calcolo la variabilità del battito cardiaco
         public static string VariabilitàBC(string[] battitiS)
         {
+            //inizializzo la variabile di ritorno
             string risp = "";
+
+            //inizializzo il nuovo array di tipo double
             double[] battitiD = new double[6];
             double max = 0;
             double min = 0;
@@ -349,6 +395,7 @@ namespace EquazioniLibrary_Bell
 
             try
             {
+                //converto i dati presenti nell'arrey di stringhe in double e li inserisco in un nuovo array dello stesso tipo
                 battitiD[0] = Convert.ToDouble(battitiS[0]);
                 battitiD[1] = Convert.ToDouble(battitiS[1]);
                 battitiD[2] = Convert.ToDouble(battitiS[2]);
@@ -356,17 +403,20 @@ namespace EquazioniLibrary_Bell
                 battitiD[4] = Convert.ToDouble(battitiS[4]);
                 battitiD[5] = Convert.ToDouble(battitiS[5]);
 
+                //controllo se i dati inseriti nell'array sono negativi
                 if (battitiD[0] <= 0 || battitiD[1] <= 0 || battitiD[2] <= 0 || battitiD[3] <= 0 || battitiD[4] <= 0 || battitiD[5] <= 0)
                 {
                     risp = "I battiti da lei inseriti sono negativi";
                 }
                 else
                 {
+                    //ordino l'array in modo da trovare subito il valore maggiore e quello minore
                     Array.Sort(battitiD);
                     max = battitiD[0];
                     min = battitiD[5];
-                    variabilità = max - min;
 
+                    //calcolo la differenza
+                    variabilità = max - min;
                     risp = Convert.ToString(variabilità);
                 }
             }
@@ -378,15 +428,17 @@ namespace EquazioniLibrary_Bell
             return risp;
         }
 
-        //5 ordine crescente dei battiti
+        //calcolo l'ordine crescente dei battiti
         public static string OrdineCB(string[] battitiS)
         {
+            //inizializzo la variabile di ritorno
             string risp = "";
             double[] battitiD = new double[6];
             string frase = "";
 
             try
             {
+                //converto i dati presenti nell'arrey di stringhe in double e li inserisco in un nuovo array dello stesso tipo
                 battitiD[0] = Convert.ToDouble(battitiS[0]);
                 battitiD[1] = Convert.ToDouble(battitiS[1]);
                 battitiD[2] = Convert.ToDouble(battitiS[2]);
@@ -394,17 +446,20 @@ namespace EquazioniLibrary_Bell
                 battitiD[4] = Convert.ToDouble(battitiS[4]);
                 battitiD[5] = Convert.ToDouble(battitiS[5]);
 
+                //controllo se i dati inseriti nell'array sono negativi
                 if (battitiD[0] <= 0 || battitiD[1] <= 0 || battitiD[2] <= 0 || battitiD[3] <= 0 || battitiD[4] <= 0 || battitiD[5] <= 0)
                 {
                     risp = "I battiti da lei inseriti sono negativi";
                 }
                 else
-                { 
+                {
+                    //ordino l'array
                     Array.Sort(battitiD);
 
+                    //faccio un ciclo for con il quale inserisco in una stringa i valori ordinati
                     for (int i = 0; i < battitiD.Length; i++)
                     {
-                        frase = battitiD[i] + " ";
+                        frase = frase + battitiD[i] + " ";
                     }
 
                     risp = frase;
@@ -418,18 +473,22 @@ namespace EquazioniLibrary_Bell
             return risp;
         }
 
-        //6 fabbisogno energetico
+        //FUNZIONALITÀ 6
+        //fabbisogno energetico
         public static string FabbisognoE(string Sesso, string Peso, string Eta, string Altezza, string TipoVita)
         {
+            //inizializzo la variabile di ritorno
             string risp = "";
             double fattore = 0;
 
             try
             {
+                //converto il peso, l'età e l'altezza da tipo string a double
                 double P = Convert.ToDouble(Peso);
                 double E = Convert.ToDouble(Eta);
                 double A = Convert.ToDouble(Altezza);
 
+                //controllo se le variabili sopra elencate hanno valore negativo e restituisco messaggi specifiche
                 if (A <= 0 || P <= 0 || E <= 0)
                 {
                     if (A <= 0)
@@ -449,8 +508,11 @@ namespace EquazioniLibrary_Bell
                 }
                 else
                 {
+                    //tutti i parametri in input sono corretti
+                    //inizializzo la variabile di appoggio dove inserirò il risulato del calcolo
                     double Fabbisogno_Energetico = 0;
 
+                    //controllo se il sesso inserito dall'utente è maschio=M, femmina=F, oppure se non è nessuno dei due restituisco un messaggio
                     if (Sesso == "M")
                     {
                         Fabbisogno_Energetico = 66.5 + (13.75 * P) + (5 * A) - (6.775 * E);
@@ -458,13 +520,15 @@ namespace EquazioniLibrary_Bell
                         //66.5 + (1058.75) + (875) - (203,25)
                         //1797
 
-                        if (Fabbisogno_Energetico < 0)
+                        //controllo se il risultato è negativo
+                        if (Fabbisogno_Energetico <= 0)
                         {
                             risp = "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti";
                         }
                         else
                         {
-                            if (TipoVita != "L" && TipoVita != "M" && TipoVita != "H")
+                            //controllo che il tipo di vita inserito sia valido altrimenti restituisco un messaggio
+                            if (TipoVita == "L" || TipoVita == "M" || TipoVita == "H")
                             {
                                 switch (TipoVita)
                                 {
@@ -481,6 +545,7 @@ namespace EquazioniLibrary_Bell
                                         break;
                                 }
 
+                                //concludo l'operazione moltiplicando il risultato precedente per il tipo di vita inserito
                                 Fabbisogno_Energetico = Fabbisogno_Energetico * fattore;
                                 //1797 * 1.7
                                 //3054,9
@@ -498,15 +563,17 @@ namespace EquazioniLibrary_Bell
                         Fabbisogno_Energetico = 655.1 + (9.563 * P) + (1.85 * A) - (4.676 * E);
                         //655.1 + (9.563 * 57) + (1.85 * 160) - (4.676 * 30)
                         //655.1 + (545.091) + (296) - (140.28)
-                        //1328,911
+                        //1355,911
 
-                        if (Fabbisogno_Energetico < 0)
+                        //controllo se il risultato è negativo
+                        if (Fabbisogno_Energetico <= 0)
                         {
                             risp = "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti";
                         }
                         else
                         {
-                            if (TipoVita != "L" && TipoVita != "M" && TipoVita != "H")
+                            //controllo che il tipo di vita inserito sia valido altrimenti restituisco un messaggio
+                            if (TipoVita == "L" || TipoVita == "M" || TipoVita == "H")
                             {
                                 switch (TipoVita)
                                 {
@@ -523,9 +590,10 @@ namespace EquazioniLibrary_Bell
                                         break;
                                 }
 
+                                //concludo l'operazione moltiplicando il risultato precedente per il tipo di vita inserito
                                 Fabbisogno_Energetico = Fabbisogno_Energetico * fattore;
-                                //1328,911 * 1.56
-                                //2073,10116
+                                //1355,911 * 1.56
+                                //2115,22116
 
                                 risp = Convert.ToString(Fabbisogno_Energetico);
                             }
@@ -534,6 +602,10 @@ namespace EquazioniLibrary_Bell
                                 risp = "il Tipo di Vita da lei inserito non è valido";
                             }
                         }
+                    }
+                    else
+                    {
+                        risp = "Il genere da lei inserito non è valido";
                     }
                 }
             }
@@ -545,22 +617,25 @@ namespace EquazioniLibrary_Bell
             return risp;
         }
 
-        //6 peso forma
+        //peso forma
         public static string PesoForma(string Sesso, string Eta, string Altezza)
         {
+            //inizializzo la variabile di ritorno
             string risp = "";
 
             try
             {
+                //converto l'età e l'altezza da tipo string a double
                 double E = Convert.ToDouble(Eta);
                 double A = Convert.ToDouble(Altezza);
 
+                //controllo se le variabili sopra elencate hanno valore negativo e restituisco messaggi specifiche
                 if (A <= 0 || E <= 0)
                 {
                     if (A <= 0)
                     {
                         risp = "L'altezza da lei inserita è negativa";
-                    }    
+                    }
 
                     if (E <= 0)
                     {
@@ -569,12 +644,16 @@ namespace EquazioniLibrary_Bell
                 }
                 else
                 {
+                    //tutti i parametri in input sono corretti
+                    //inizializzo la variabile di appoggio dove inserirò il risulato del calcolo
                     double Peso_Forma = 0;
 
+                    //controllo se il sesso inserito dall'utente è maschio=M, femmina=F, oppure se non è nessuno dei due restituisco un messaggio
                     if (Sesso == "M")
                     {
                         Peso_Forma = (A - 100) + (E / 10);
 
+                        //controllo se il risultato è negativo
                         if (Peso_Forma < 0)
                         {
                             risp = "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti";
@@ -588,6 +667,7 @@ namespace EquazioniLibrary_Bell
                     {
                         Peso_Forma = ((A - 100) + (E / 10)) * 0.9;
 
+                        //controllo se il risultato è negativo
                         if (Peso_Forma < 0)
                         {
                             risp = "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti";
@@ -610,13 +690,16 @@ namespace EquazioniLibrary_Bell
         //6 perdere peso
         public static string PerderePeso(string Peso, string PesoForma)
         {
+            //inizializzo la variabile di ritorno
             string risp = "";
 
             try
             {
+                //converto il peso e il peso forma da tipo string a double
                 double P = Convert.ToDouble(Peso);
                 double PS = Convert.ToDouble(PesoForma);
 
+                //controllo se le variabili sopra elencate hanno valore negativo e restituisco messaggi specifiche
                 if (P <= 0 || PS <= 0)
                 {
                     if (P <= 0)
@@ -631,10 +714,13 @@ namespace EquazioniLibrary_Bell
                 }
                 else
                 {
+                    //tutti i parametri in input sono corretti
+                    //inizializzo la variabile di appoggio dove inserirò il risulato del calcolo
                     double differenza = 0;
 
                     differenza = P - PS;
 
+                    //controllo se il risultato è maggiore, minore o uguale a zero e restituisco messaggi opportuni
                     if (differenza < 0)
                     {
                         risp = "Lei è sottopeso rispetto al suo peso ideale";

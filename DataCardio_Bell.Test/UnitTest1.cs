@@ -6,45 +6,17 @@ namespace DataCardio_Bell.Test
     [TestClass]
     public class UnitTest1
     {
+        //FUNZIONALITÀ 1
         //testo la frequenza cardiaca massima
+        [DataRow("18", "202")]
+        [DataRow("a", "Errore")]
+        [DataRow("0", "Errore")]
+        [DataRow("-5", "Errore")]
         [TestMethod]
-        public void TestFrequenzaCMax()
+        public void TestFrequenzaCMax(string E, string Atteso)
         {
-            string eta = "18";
-            string FCMax_Atteso = "202";
-
-            string FCMax_Calcolato = EquazioniLibrary_Bell.DataCardio.FrequenzaCMax(eta);
-
-            Assert.AreEqual(FCMax_Atteso, FCMax_Calcolato);
-        }
-
-        [TestMethod]
-        public void TestFrequenzaCMax1()
-        {
-            string eta = "a";
-            string FCMax_Atteso = "Errore";
-
-            string FCMax_Calcolato = EquazioniLibrary_Bell.DataCardio.FrequenzaCMax(eta);
-
-            Assert.AreEqual(FCMax_Atteso, FCMax_Calcolato);
-        }
-
-        [TestMethod]
-        public void TestFrequenzaCMax2()
-        {
-            string eta = "0";
-            string FCMax_Atteso = "Errore";
-
-            string FCMax_Calcolato = EquazioniLibrary_Bell.DataCardio.FrequenzaCMax(eta);
-
-            Assert.AreEqual(FCMax_Atteso, FCMax_Calcolato);
-        }
-
-        [TestMethod]
-        public void TestFrequenzaCMax3()
-        {
-            string eta = "-5";
-            string FCMax_Atteso = "Errore";
+            string eta = E;
+            string FCMax_Atteso = Atteso;
 
             string FCMax_Calcolato = EquazioniLibrary_Bell.DataCardio.FrequenzaCMax(eta);
 
@@ -52,44 +24,15 @@ namespace DataCardio_Bell.Test
         }
 
         //testo il numero dei battiti massimi
+        [DataRow("204", "183,6")]
+        [DataRow("a", "Errore")]
+        [DataRow("0", "Errore")]
+        [DataRow("-5", "Errore")]
         [TestMethod]
-        public void TestNBattitiMax()
+        public void TestNBattitiMax(string FCM, string Atteso)
         {
-            string FCMax = "204";
-            string BMax_Atteso = "183,6";
-
-            string BMax_Calcolato = EquazioniLibrary_Bell.DataCardio.NBattitiMax(FCMax);
-
-            Assert.AreEqual(BMax_Atteso, BMax_Calcolato);
-        }
-
-        [TestMethod]
-        public void TestNBattitiMax1()
-        {
-            string FCMax = "a";
-            string BMax_Atteso = "Errore";
-
-            string BMax_Calcolato = EquazioniLibrary_Bell.DataCardio.NBattitiMax(FCMax);
-
-            Assert.AreEqual(BMax_Atteso, BMax_Calcolato);
-        }
-
-        [TestMethod]
-        public void TestNBattitiMax2()
-        {
-            string FCMax = "0";
-            string BMax_Atteso = "Errore";
-
-            string BMax_Calcolato = EquazioniLibrary_Bell.DataCardio.NBattitiMax(FCMax);
-
-            Assert.AreEqual(BMax_Atteso, BMax_Calcolato);
-        }
-
-        [TestMethod]
-        public void TestNBattitiMax3()
-        {
-            string FCMax = "-5";
-            string BMax_Atteso = "Errore";
+            string FCMax = FCM;
+            string BMax_Atteso = Atteso;
 
             string BMax_Calcolato = EquazioniLibrary_Bell.DataCardio.NBattitiMax(FCMax);
 
@@ -97,53 +40,25 @@ namespace DataCardio_Bell.Test
         }
 
         //testo il numero dei battiti minimi
+        [DataRow("204", "142,8")]
+        [DataRow("a", "Errore")]
+        [DataRow("0", "Errore")]
+        [DataRow("-5", "Errore")]
         [TestMethod]
-        public void TestNBattitiMin()
+        public void TestNBattitiMin(string FCM, string Atteso)
         {
-            string FCMax = "204";
-            string BMin_Atteso = "142,8";
+            string FCMax = FCM;
+            string BMin_Atteso = Atteso;
 
             string BMin_Calcolato = EquazioniLibrary_Bell.DataCardio.NBattitiMin(FCMax);
 
             Assert.AreEqual(BMin_Atteso, BMin_Calcolato);
         }
 
-        [TestMethod]
-        public void TestNBattitiMin1()
-        {
-            string FCMax = "a";
-            string BMin_Atteso = "Errore";
-
-            string BMin_Calcolato = EquazioniLibrary_Bell.DataCardio.NBattitiMin(FCMax);
-
-            Assert.AreEqual(BMin_Atteso, BMin_Calcolato);
-        }
-
-        [TestMethod]
-        public void TestNBattitiMin2()
-        {
-            string FCMax = "0";
-            string BMin_Atteso = "Errore";
-
-            string BMin_Calcolato = EquazioniLibrary_Bell.DataCardio.NBattitiMin(FCMax);
-
-            Assert.AreEqual(BMin_Atteso, BMin_Calcolato);
-        }
-
-        [TestMethod]
-        public void TestNBattitiMin3()
-        {
-            string FCMax = "-5";
-            string BMin_Atteso = "Errore";
-
-            string BMin_Calcolato = EquazioniLibrary_Bell.DataCardio.NBattitiMin(FCMax);
-
-            Assert.AreEqual(BMin_Atteso, BMin_Calcolato);
-        }
-
+        //FUNZIONALITÀ 2
         //testo i valori di frequenza cardiaca a riposo
         [DataRow("55", "Bradicardia")]
-        [DataRow("111.2", "Tachicardia")]
+        [DataRow("111,2", "Tachicardia")]
         [DataRow("70", "Normale")]
         [DataRow("a", "Errore")]
         [DataRow("0", "Errore")]
@@ -159,6 +74,7 @@ namespace DataCardio_Bell.Test
             Assert.AreEqual(FCR_Atteso, FCR_Calcolato);
         }
 
+        //FUNZIONALITÀ 3
         //testo i valori delle calorie bruciate
         [DataRow("F", "75", "57", "30", "30", "58,6218929254302")]
         [DataRow("M", "70", "77", "30", "30", "74,8573135755259")]
@@ -168,8 +84,8 @@ namespace DataCardio_Bell.Test
         [DataRow("F", "75", "-5", "30", "30", "Il peso da lei inserito è negativo")]
         [DataRow("F", "75", "57", "-5", "30", "L'età da lei inserita è negativa")]
         [DataRow("M", "75", "57", "30", "-5", "Il Tempo da lei inserito è negativo")]
-        [DataRow("F", "2", "2", "2", "2", "Le calorie bruciate risultano negative, i dati non sono corretti")]
-        [DataRow("M", "2", "2", "2", "2", "Le calorie bruciate risultano negative, i dati non sono corretti")]
+        [DataRow("F", "2", "2", "2", "2", "Le calorie bruciate risultano negative, i dati inseriti non sono corretti")]
+        [DataRow("M", "2", "2", "2", "2", "Le calorie bruciate risultano negative, i dati inseriti non sono corretti")]
         [TestMethod]
         public void CBruciate(string S, string FC, string P, string E, string T, string Atteso)
         {
@@ -185,6 +101,7 @@ namespace DataCardio_Bell.Test
             Assert.AreEqual(CB_Atteso, CB_Calcolato);
         }
 
+        //FUNZIONALITÀ 4
         //testo i valori della spesa energetica
         [DataRow("corsa", "10", "57", "513")]
         [DataRow("camm", "10", "57", "285")]
@@ -205,7 +122,8 @@ namespace DataCardio_Bell.Test
             Assert.AreEqual(SE_Attesa, SE_Calcolata);
         }
 
-        //testo i valori della spesa energetica
+        //FUNZIONALITÀ 5
+        //testo i valori della media giornaliera dei battiti cardiaci
         [DataRow("95", "80,3", "66", "72", "77", "62,1", "75,4")]
         [DataRow("95", "-80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
         [DataRow("-95", "80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
@@ -217,33 +135,43 @@ namespace DataCardio_Bell.Test
         [TestMethod]
         public void MediaDBC(string B1, string B2, string B3, string B4, string B5, string B6, string Atteso)
         {
-            string Battito1 = B1;
-            string Battito2 = B2;
-            string Battito3 = B3;
-            string Battito4 = B4;
-            string Battito5 = B5;
-            string Battito6 = B6;
+            string[] battiti = new string[6];
+
+            battiti[0] = B1;
+            battiti[1] = B2;
+            battiti[2] = B3;
+            battiti[3] = B4;
+            battiti[4] = B5;
+            battiti[5] = B6;
+
             string MDBC_Attesa = Atteso;
 
-            string MDCB_Calcolata = EquazioniLibrary_Bell.DataCardio.MediaDBC(Battito1, Battito2, Battito3, Battito4, Battito5, Battito6);
+            string MDCB_Calcolata = EquazioniLibrary_Bell.DataCardio.MediaDBC(battiti);
 
             Assert.AreEqual(MDBC_Attesa, MDCB_Calcolata);
         }
 
         //testo il battito cardiaco a riposo
+        [DataRow("66", "70", "77", "69", "71", "72", "70,8333333333333")]
+        [DataRow("-66", "70", "77", "69", "71", "72", "I battiti da lei inseriti sono negativi")]
+        [DataRow("66", "-70", "77", "69", "71", "72", "I battiti da lei inseriti sono negativi")]
+        [DataRow("66", "70", "-77", "69", "71", "72", "I battiti da lei inseriti sono negativi")]
+        [DataRow("66", "70", "77", "-69", "71", "72", "I battiti da lei inseriti sono negativi")]
+        [DataRow("66", "70", "77", "69", "-71", "72", "I battiti da lei inseriti sono negativi")]
+        [DataRow("66", "70", "77", "69", "71", "-72", "I battiti da lei inseriti sono negativi")]
         [TestMethod]
-        public void BCRiposo()
+        public void BCRiposo(string B1, string B2, string B3, string B4, string B5, string B6, string Atteso)
         {
             string[] battiti = new string[6];
 
-            battiti[0] = "70";
-            battiti[1] = "72";
-            battiti[2] = "66";
-            battiti[3] = "77";
-            battiti[4] = "71";
-            battiti[5] = "68";
+            battiti[0] = B1;
+            battiti[1] = B2;
+            battiti[2] = B3;
+            battiti[3] = B4;
+            battiti[4] = B5;
+            battiti[5] = B6;
 
-            string media_Attesa = "70,666666666666";
+            string media_Attesa = Atteso;
 
             string media_Calcolata = EquazioniLibrary_Bell.DataCardio.BCRiposo(battiti);
 
@@ -251,19 +179,26 @@ namespace DataCardio_Bell.Test
         }
 
         //testo la variabilità del battito cardiaco
+        [DataRow("95", "80,3", "66", "72", "77", "62,1", "62,1 66 72 77 80,3 95 ")]
+        [DataRow("-95", "80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "-80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "-72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "-77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "77", "-62,1", "I battiti da lei inseriti sono negativi")]
         [TestMethod]
-        public void VariabilitàBC()
+        public void VariabilitàBC(string B1, string B2, string B3, string B4, string B5, string B6, string Atteso)
         {
             string[] battiti = new string[6];
 
-            battiti[0] = "95";
-            battiti[1] = "80,3";
-            battiti[2] = "66";
-            battiti[3] = "72";
-            battiti[4] = "77";
-            battiti[5] = "62.1";
+            battiti[0] = B1;
+            battiti[1] = B2;
+            battiti[2] = B3;
+            battiti[3] = B4;
+            battiti[4] = B5;
+            battiti[5] = B6;
 
-            string variabilità_Attesa = "32,9";
+            string variabilità_Attesa = Atteso;
 
             string variabilità_Calcolata = EquazioniLibrary_Bell.DataCardio.VariabilitàBC(battiti);
 
@@ -271,36 +206,44 @@ namespace DataCardio_Bell.Test
         }
 
         //testo l'ordine crescente dei battiti
+        [DataRow("95", "80,3", "66", "72", "77", "62,1", "62,1 66 72 77 80,3 95 ")]
+        [DataRow("-95", "80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "-80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "-72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "-77", "62,1", "I battiti da lei inseriti sono negativi")]
+        [DataRow("95", "80,3", "66", "72", "77", "-62,1", "I battiti da lei inseriti sono negativi")]
         [TestMethod]
-        public void OrdineCB()
+        public void OrdineCB(string B1, string B2, string B3, string B4, string B5, string B6, string Atteso)
         {
             string[] battiti = new string[6];
 
-            battiti[0] = "95";
-            battiti[1] = "80,3";
-            battiti[2] = "66";
-            battiti[3] = "72";
-            battiti[4] = "77";
-            battiti[5] = "62.1";
+            battiti[0] = B1;
+            battiti[1] = B2;
+            battiti[2] = B3;
+            battiti[3] = B4;
+            battiti[4] = B5;
+            battiti[5] = B6;
 
-            string ordine_Atteso = "62,1; 62,1; 66; 72; 77; 80,3; 95 ";
+            string ordine_Atteso = Atteso;
 
             string ordine_Calcolato = EquazioniLibrary_Bell.DataCardio.OrdineCB(battiti);
 
-            Assert.AreEqual(ordine_Calcolato, ordine_Atteso);
+            Assert.AreEqual(ordine_Atteso, ordine_Calcolato);
         }
 
+        //FUNZIONALITÀ 6
         //testo i valori del fabbisogno energetico
-        [DataRow("F", "57", "30", "160", "M", "2073,10116")]
+        [DataRow("F", "57", "30", "160", "M", "2115,22116")]
         [DataRow("M", "77", "30", "175", "M", "3054,9")]
         [DataRow("B", "77", "30", "175", "M", "Il genere da lei inserito non è valido")]
         [DataRow("M", "F", "30", "175", "M", "Errore")]
         [DataRow("F", "77", "30", "-175", "M", "L'altezza da lei inserita è negativa")]
-        [DataRow("F", "-75", "5", "30", "30", "Il peso da lei inserito è negativo")]
-        [DataRow("F", "75", "-57", "-5", "30", "L'età da lei inserita è negativa")]
-        [DataRow("M", "75", "57", "30", "-5", "Il Tipo di Vita da lei inserito non è valido")]
-        [DataRow("F", "2", "2", "2", "2", "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti")]
-        [DataRow("M", "2", "2", "2", "2", "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti")]
+        [DataRow("F", "-75", "5", "30", "L", "Il peso da lei inserito è negativo")]
+        [DataRow("F", "75", "-57", "-5", "H", "L'età da lei inserita è negativa")]
+        [DataRow("M", "75", "57", "30", "5", "Il Tipo di Vita da lei inserito non è valido")]
+        [DataRow("F", "1", "200", "1", "M", "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti")]
+        [DataRow("M", "1", "200", "1", "L", "Il Fabbisogno Energetico risulta negativo, i dati inseriti non sono corretti")]
         [TestMethod]
         public void FabbisognoE(string S, string P, string E, string A, string TV, string Atteso)
         {
@@ -358,15 +301,3 @@ namespace DataCardio_Bell.Test
         }
     }
 }
-
-
-/*
- *         [DataRow("95", "80,3", "66", "72", "77", "62,1", "62,1; 66; 72; 77; 80,3; 95")]
-        [DataRow("95", "-80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("-95", "80,3", "66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "80,3", "66", "-72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "80,3", "66", "72", "-77", "62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "80,3", "66", "72", "77", "-62,1", "I battiti da lei inseriti sono negativi")]
-        [DataRow("95", "-80,3", "-66", "72", "77", "62,1", "I battiti da lei inseriti sono negativi")]
-*/
